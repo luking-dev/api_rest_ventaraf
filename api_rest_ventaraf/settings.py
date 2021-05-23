@@ -6,6 +6,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_DIR = os.path.join(BASE_DIR, "api_rest_ventaraf")
 
+# Load data from environment variables
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -30,6 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'anuncios.apps.AnunciosConfig',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +132,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5,
+}
